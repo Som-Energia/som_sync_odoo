@@ -3,7 +3,6 @@
 from odoo import models, fields
 
 class ResPartner(models.Model):
-    #_inherit = 'res.partner'
     _inherit = ['res.partner']
     _name = 'res.partner'
 
@@ -25,6 +24,13 @@ class AccountAccount(models.Model):
     openerp_id = fields.Integer('ID in OpenERP', readonly=True,
             help="ID in OpenERP for syncronization")
 
+class AccountAccountType(models.Model):
+    _inherit = ['account.account.type']
+    _name = 'account.account.type'
+
+    openerp_id = fields.Integer('ID in OpenERP', readonly=True,
+            help="ID in OpenERP for syncronization")
+
 class AccountMove(models.Model):
     _inherit = ['account.move']
     _name = 'account.move'
@@ -39,9 +45,9 @@ class AccountMoveLine(models.Model):
     openerp_id = fields.Integer('ID in OpenERP', readonly=True,
             help="ID in OpenERP for syncronization")
 
-class AccountPeriod(models.Model):
-    _inherit = ['account.period']
-    _name = 'account.period'
-
-    openerp_id = fields.Integer('ID in OpenERP', readonly=True,
-            help="ID in OpenERP for syncronization")
+#class AccountPeriod(models.Model):
+#    _inherit = ['account.period']
+#    _name = 'account.period'
+#
+#    openerp_id = fields.Integer('ID in OpenERP', readonly=True,
+#            help="ID in OpenERP for syncronization")
