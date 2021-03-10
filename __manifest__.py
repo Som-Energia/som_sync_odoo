@@ -4,7 +4,9 @@
     'category': 'Tools',
     'summary': 'Sync OpenERP  Odoo',
     'depends': ['base', 'account'],
-    'data': [],
+    'data': [
+        'views/som_sync_views.xml'
+    ],
     'installable': True,
     'auto_install': True,
 }
