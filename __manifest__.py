@@ -5,7 +5,8 @@
     'summary': 'Sync OpenERP  Odoo',
     'depends': ['base', 'account'],
     'data': [
-        'views/som_sync_views.xml'
+        'views/som_sync_views.xml',
+        'data/res_users.xml',
     ],
     'installable': True,
     'auto_install': True,

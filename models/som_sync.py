@@ -19,13 +19,13 @@ class ResPartner(models.Model):
 
     @api.multi
     def write(self, vals):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot modify this Partner from Odoo. You have to do it from OpenERP'))
         return super(ResPartner, self).write(vals)
 
     @api.multi
     def unlink(self):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot delete this Partner from Odoo. You have to do it from OpenERP'))
         return super(ResPartner, self).unlink()
 
@@ -38,13 +38,13 @@ class AccountJournal(models.Model):
 
     @api.multi
     def write(self, vals):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot modify this Journal from Odoo. You have to do it from OpenERP'))
         return super(AccountJournal, self).write(vals)
 
     @api.multi
     def unlink(self):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot delete this Journal from Odoo. You have to do it from OpenERP'))
         return super(AccountJournal, self).unlink()
 
@@ -57,13 +57,13 @@ class AccountAccount(models.Model):
 
     @api.multi
     def write(self, vals):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot modify this Account from Odoo. You have to do it from OpenERP'))
         return super(AccountAccount, self).write(vals)
 
     @api.multi
     def unlink(self):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot delete this Account from Odoo. You have to do it from OpenERP'))
         return super(AccountAccount, self).unlink()
 
@@ -76,13 +76,13 @@ class AccountAccountType(models.Model):
 
     @api.multi
     def write(self, vals):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot modify this Account Type from Odoo. You have to do it from OpenERP'))
         return super(AccountAccountType, self).write(vals)
 
     @api.multi
     def unlink(self):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot delete this Account Type from Odoo. You have to do it from OpenERP'))
         return super(AccountAccountType, self).unlink()
 
@@ -95,13 +95,13 @@ class AccountMove(models.Model):
 
     @api.multi
     def write(self, vals):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot modify this Move from Odoo. You have to do it from OpenERP'))
         return super(AccountMove, self).write(vals)
 
     @api.multi
     def unlink(self):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot delete this Move from Odoo. You have to do it from OpenERP'))
         return super(AccountMove, self).unlink()
 
@@ -115,13 +115,13 @@ class AccountMoveLine(models.Model):
 
     @api.multi
     def write(self, vals):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot modify this Move Line from Odoo. You have to do it from OpenERP'))
         return super(AccountMoveLine, self).write(vals)
 
     @api.multi
     def unlink(self):
-        if self.read(['openerp_id'])[0]['openerp_id']:
+        if self.read(['openerp_id'])[0]['openerp_id'] and self.env.uid != self.env.ref("som_sync_odoo.openerp_sync_user").id:
             raise SyncError(_('You cannot delete this Move Line from Odoo. You have to do it from OpenERP'))
         return super(AccountMoveLine, self).unlink()
 
