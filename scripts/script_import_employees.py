@@ -61,18 +61,18 @@ class ImportData:
                 'firstname': employee_data['nom'].decode('utf8'),
                 'lastname': employee_data['cognoms'].decode('utf8'),
                 #'name': employee_data['cognoms'] + ", " + employee_data['nom'],
-                'street': employee_data['carrer'].decode('utf8'),
-                'city': employee_data['poblacio'].decode('utf8'),
-                'state_id': state_id,
-                'country_id': 68,
-                'zip': employee_data['codi_postal'],
-                'mobile': employee_data['num_mobil'],
-                'phone': employee_data['num_fix'],
+                #'street': employee_data['carrer'].decode('utf8'),
+                #'city': employee_data['poblacio'].decode('utf8'),
+                #'state_id': state_id,
+                #'country_id': 68,
+                #'zip': employee_data['codi_postal'],
+                #'mobile': employee_data['num_mobil'],
+                #'phone': employee_data['num_fix'],
                 'email': employee_data['email'],
-                'vat': employee_data['dni'],
+                #'vat': employee_data['dni'],
             }
             try:
-                if O.ResPartner.search([('vat','=',employee_data['dni'])]):
+                if O.ResPartner.search([('email','=',employee_data['email'])]):
                     raise Exception("Partner already exist")
                 partner_id = O.ResPartner.create(partner_data)
                 success("Partner created: {}", partner_data['email'])
@@ -84,16 +84,17 @@ class ImportData:
 
 
             # CREATE USER
-            import pudb;pu.db
             # Get groups_ids
-            groups = employee_data['permisos'].split(',')
-            groups_id = []
-            for group in groups:
-                group_id = O.ResGroups.search([('full_name','=',group)])
-                if not group_id:
-                    warn("Grup no trobat {}", group.decode('utf8'))
-                else:
-                    groups_id.append(group_id[0])
+            # groups = employee_data['permisos'].split(',')
+            # groups_id = []
+            #for group in groups:
+            #    group_id = O.ResGroups.search([('full_name','=',group)])
+            #    if not group_id:
+            #        warn("Grup no trobat {}", group.decode('utf8'))
+            #    else:
+            #        groups_id.append(group_id[0])
+            #gropus_id = Attendance / Officer, Leaves / Officer, Employees / Officer
+            groups_id = [26,31, 16]
             # Create user
             user_data = {
                 'firstname': employee_data['nom'].decode('utf8'),
@@ -134,27 +135,32 @@ class ImportData:
                 jornada_id = O.IrModelData.get_object_reference('somenergia','resource_calendar_som_35h')[1]
             elif employee_data['jornada'] == '32':
                 jornada_id = O.IrModelData.get_object_reference('somenergia','resource_calendar_som_32h_dll_div')[1]
+            elif employee_data['jornada'] == '30':
+                jornada_id = O.IrModelData.get_object_reference('somenergia','resource_calendar_som_30h')[1]
+            elif employee_data['jornada'] == '20':
+                jornada_id = O.IrModelData.get_object_reference('somenergia','resource_calendar_som_20h')[1]
+            elif employee_data['jornada'] == '10':
+                jornada_id = O.IrModelData.get_object_reference('somenergia','resource_calendar_som_10h')[1]
 
             empleat_data = {
                 'name': employee_data['cognoms'].decode('utf8') + ", " + employee_data['nom'].decode('utf8'),
-                'identification_id': employee_data['dni'],
+                #'identification_id': employee_data['dni'],
                 'work_email': employee_data['email'],
                 'department_id': team_id,
-                'gender': employee_data['genere'],
+                #'gender': employee_data['genere'],
                 'user_id': user_id,
                 'resource_calendar_id': jornada_id,
-                'birthday':  datetime.strftime(datetime.strptime(employee_data['data_neixement'], "%d/%m/%Y"), "%Y-%m-%d"),
+                #'birthday':  datetime.strftime(datetime.strptime(employee_data['data_neixement'], "%d/%m/%Y"), "%Y-%m-%d"),
                 'theoretical_hours_start_date': '2021-04-01',
             }
             try:
-                if O.HrEmployee.search([('identification_id','=',employee_data['dni'])]):
+                if O.HrEmployee.search([('work_emial','=',employee_data['email'])]):
                     raise Exception("Employee already exist")
                 employee_id = O.HrEmployee.create(empleat_data)
                 success("Employee created: {}", empleat_data['name'])
             except Exception as e:
                 msg = "I couldn\'t create a new empoyee {}, reason {}"
                 warn(msg, empleat_data, e)
-
 
 
 
